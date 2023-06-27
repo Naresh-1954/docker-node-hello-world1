@@ -22,14 +22,12 @@ pipeline {
         }
 
         stage('Tag image') {
-          steps {
-            script {
-                def dockerImage = docker.image("${dockerImageName}:${dockerImageTag}")
-                dockerImage.tag("registry.hub.docker.com/${dockerImageName}:${dockerImageTag}")
-             }
-           }
+            steps {
+                script {
+                    docker.tag("${dockerImageName}:${dockerImageTag}", "registry.hub.docker.com/${dockerImageName}:${dockerImageTag}")
+                }
+            }
         }
-
 
         stage('Pushing Image') {
             environment {

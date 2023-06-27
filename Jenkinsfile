@@ -21,12 +21,17 @@ pipeline {
             }
         }
 
-    stage('Tag image') {
-       steps {
-           sh "docker tag ${dockerImageName}:${dockerImageTag} registry.hub.docker.com/${dockerImageName}:${dockerImageTag}"
-       }
-    }
+        stage('Tag image') {
+            steps {
+                script {
+                    // Option 1: Using docker.tag() method
+                    docker.tag("${dockerImageName}:${dockerImageTag}", "${dockerImageName}:latest")
 
+                    // Option 2: Using sh command to execute docker tag command
+                    // sh "docker tag ${dockerImageName}:${dockerImageTag} ${dockerImageName}:custom-tag"
+                }
+            }
+        }
 
         stage('Pushing Image') {
             environment {
@@ -36,6 +41,8 @@ pipeline {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
                         dockerImage.push("${dockerImageName}:${dockerImageTag}")
+                        dockerImage.push("${dockerImageName}:latest")
+                        dockerImage.push("${dockerImageName}:custom-tag")
                     }
                 }
             }

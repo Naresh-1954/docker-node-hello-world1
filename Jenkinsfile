@@ -1,7 +1,8 @@
 pipeline {
     agent any
-     environment {
-        dockerimagename = "naresh1985/node-hello-world"
+    environment {
+        dockerImageName = "naresh1985/node-hello-world"
+        dockerImageTag = "1.1"
         dockerImage = ""
     }
 
@@ -12,28 +13,25 @@ pipeline {
             }
         }
 
-
         stage('Build image') {
-			steps{
-			 script {
-				dockerImage = docker.build dockerimagename
-			 }
-			}
-        }   
+            steps {
+                script {
+                    dockerImage = docker.build("${dockerImageName}:${dockerImageTag}")
+                }
+            }
+        }
 
-		stage('Pushing Image') {
-			environment {
-					registryCredential = 'dockerlogin'
-				}
-			steps{
-				script {
-				docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-					dockerImage.push("latest")
-				}
-				}
-			}
-		}
-
+        stage('Pushing Image') {
+            environment {
+                registryCredential = 'dockerlogin'
+            }
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+                        dockerImage.push("${dockerImageName}:${dockerImageTag}")
+                    }
+                }
+            }
+        }
     }
 }
-

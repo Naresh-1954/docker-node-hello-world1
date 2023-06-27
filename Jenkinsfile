@@ -21,11 +21,11 @@ pipeline {
             }
         }
 
-      stage('Tag image') {
-         steps {
-             sh "docker tag ${dockerImageName}:${dockerImageTag} registry.hub.docker.com/${dockerImageName}:${dockerImageTag}"
-         }
-       }
+        stage('Tag image') {
+            steps {
+                sh "docker tag ${dockerImageName}:${dockerImageTag} registry.hub.docker.com/${dockerImageName}:${dockerImageTag}"
+            }
+        }
 
         stage('Pushing Image') {
             environment {

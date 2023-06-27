@@ -24,6 +24,7 @@ pipeline {
         stage('Tag image') {
             steps {
                 script {
+                    sh "docker tag ${dockerImageName}:${dockerImageTag} ${dockerImageName}:${dockerImageTag}"
                     sh "docker tag ${dockerImageName}:${dockerImageTag} ${dockerImageName}:latest"
                 }
             }

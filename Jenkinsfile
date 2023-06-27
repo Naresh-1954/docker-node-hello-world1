@@ -23,11 +23,7 @@ pipeline {
 
         stage('Tag image') {
             steps {
-                script {
-                    def image = docker.image("${dockerImageName}:${dockerImageTag}")
-                    image.tag("${dockerImageName}:latest")
-                    sh "docker tag ${dockerImageName}:${dockerImageTag} ${dockerImageName}:custom-tag"
-                }
+                sh "docker tag ${dockerImageName}:${dockerImageTag} ${dockerImageName}:latest"
             }
         }
 
@@ -40,7 +36,6 @@ pipeline {
                     docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
                         dockerImage.push("${dockerImageName}:${dockerImageTag}")
                         dockerImage.push("${dockerImageName}:latest")
-                        dockerImage.push("${dockerImageName}:custom-tag")
                     }
                 }
             }

@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         dockerImageName = "naresh1985/node-hello-world"
-        dockerImageTag = "1.1"
+        dockerImageTag = "1.2"
         dockerRegistry = "https://registry.hub.docker.com"
         dockerRegistryCredentials = "dockerlogin"
     }

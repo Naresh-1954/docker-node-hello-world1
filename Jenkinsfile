@@ -21,6 +21,14 @@ pipeline {
             }
         }
 
+        stage('Tag image') {
+            steps {
+                script {
+                    docker.tag("${dockerImageName}:${dockerImageTag}", "registry.hub.docker.com/${dockerImageName}:${dockerImageTag}")
+                }
+            }
+        }
+
         stage('Pushing Image') {
             environment {
                 registryCredential = 'dockerlogin'

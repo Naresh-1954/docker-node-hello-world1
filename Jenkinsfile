@@ -3,7 +3,7 @@ pipeline {
     environment {
         dockerImageName = "naresh1985/node-hello-world"
         dockerImageTag = "1.1"
-        dockerRegistry = "registry.hub.docker.com"
+        dockerRegistry = "https://registry.hub.docker.com"
         dockerRegistryCredentials = "dockerlogin"
     }
 

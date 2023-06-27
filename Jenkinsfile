@@ -23,7 +23,9 @@ pipeline {
 
         stage('Tag image') {
             steps {
-                sh "docker tag ${dockerImageName}:${dockerImageTag} registry.hub.docker.com/${dockerImageName}:${dockerImageTag}"
+                script {
+                    sh "docker tag ${dockerImageName}:${dockerImageTag} ${dockerImageName}:latest"
+                }
             }
         }
 

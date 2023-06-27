@@ -1,7 +1,7 @@
 pipeline {
     agent any
      environment {
-        dockerimagename = "naresh1985/node-hello-world:0.0.1"
+        dockerimagename = "naresh1985/node-hello-world:1.1"
         dockerImage = ""
     }
 
@@ -28,7 +28,7 @@ pipeline {
 			steps{
 				script {
 				docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-					dockerImage.push("naresh1985/node-hello-world:0.0.1")
+					dockerImage.push("naresh1985/node-hello-world:1.1")
 				}
 				}
 			}

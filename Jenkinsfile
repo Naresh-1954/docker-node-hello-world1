@@ -24,11 +24,9 @@ pipeline {
         stage('Tag image') {
             steps {
                 script {
-                    // Option 1: Using docker.tag() method
-                    // docker.tag("${dockerImageName}:${dockerImageTag}", "${dockerImageName}:latest")
-
-                    // Option 2: Using sh command to execute docker tag command
-                     sh "docker tag ${dockerImageName}:${dockerImageTag} ${dockerImageName}:custom-tag"
+                    def image = docker.image("${dockerImageName}:${dockerImageTag}")
+                    image.tag("${dockerImageName}:latest")
+                    sh "docker tag ${dockerImageName}:${dockerImageTag} ${dockerImageName}:custom-tag"
                 }
             }
         }

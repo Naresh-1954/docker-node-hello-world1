@@ -3,7 +3,8 @@ pipeline {
     environment {
         dockerImageName = "naresh1985/node-hello-world"
         dockerImageTag = "1.1"
-        dockerImage = ""
+        dockerRegistry = "registry.hub.docker.com"
+        dockerRegistryCredentials = "dockerlogin"
     }
 
     stages {
@@ -13,32 +14,13 @@ pipeline {
             }
         }
 
-        stage('Build image') {
+        stage('Build and Push Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${dockerImageName}:${dockerImageTag}")
-                }
-            }
-        }
-
-        stage('Tag image') {
-            steps {
-                script {
-                    sh "docker tag ${dockerImageName}:${dockerImageTag} ${dockerImageName}:${dockerImageTag}"
-                    sh "docker tag ${dockerImageName}:${dockerImageTag} ${dockerImageName}:latest"
-                }
-            }
-        }
-
-        stage('Pushing Image') {
-            environment {
-                registryCredential = 'dockerlogin'
-            }
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-                        dockerImage.push("${dockerImageName}:${dockerImageTag}")
-                        dockerImage.push("${dockerImageName}:latest")
+                    def imageTag = "${dockerImageName}:${dockerImageTag}"
+                    docker.build(imageTag)
+                    docker.withRegistry(dockerRegistry, dockerRegistryCredentials) {
+                        docker.image(imageTag).push()
                     }
                 }
             }

@@ -13,7 +13,7 @@ spec:
         app: nodejs-app
     spec:
       containers:
-      - image: naresh1985/node-hello-world:19
+      - image: naresh1985/node-hello-world:20
         name: nodejs-app
         ports:
         - containerPort: 5000

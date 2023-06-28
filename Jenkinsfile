@@ -5,7 +5,7 @@ pipeline {
         dockerImageTag = "${BUILD_NUMBER}"
         dockerRegistry = "https://registry.hub.docker.com"
         dockerRegistryCredentials = "dockerlogin"
-      }
+    }
 
     stages {
         stage('Checkout') {
@@ -25,14 +25,13 @@ pipeline {
                 }
             }
         }
-		
-		stage('Trigger the config change in pipeline') {
+
+        stage('Trigger the config change in pipeline') {
             steps {
                 script {
-                        sh " curl -v -k -user admin:116c74bba9d03fd70e2fa8b6188663aaaa -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' -data 'IMAGE_TAG=${dockerImageTag}" 'http://50.19.171.233:8080/job/gitops-argocd_CD/buildWithParameters?token=gitops-config' "
-                    }
+                    sh "curl -v -k -user admin:116c74bba9d03fd70e2fa8b6188663aaaa -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' -d 'IMAGE_TAG=${dockerImageTag}' 'http://50.19.171.233:8080/job/gitops-argocd_CD/buildWithParameters?token=gitops-config'"
                 }
+            }
         }
     }
 }
-

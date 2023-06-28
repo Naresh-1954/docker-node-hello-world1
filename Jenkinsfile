@@ -38,7 +38,7 @@ pipeline {
             }
         }
 		
-		stage('Push the change deployment file to git') {
+        stage('Push the change deployment file to git') {
             steps {
                 script {
                     sh """
@@ -48,7 +48,7 @@ pipeline {
 					git commit -m "updated the deployment file
 					"""
 					withCredentials([gitUsernamePassword(credentialsId: 'github-user', gitToolName: 'Default')]) {
-					    sh "git push https://github.com/Naresh-1954/docker-node-hello-world.git"
+					    sh "git push https://github.com/Naresh-1954/docker-node-hello-world.git master"
                      }
                     
                 }

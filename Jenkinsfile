@@ -6,7 +6,7 @@ pipeline {
         dockerRegistry = "https://registry.hub.docker.com"
         dockerRegistryCredentials = "dockerlogin"
         gitUsername = "Naresh-1954"
-        gitPassword = "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"
+        gitPassword = "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"
     }
 
     stages {

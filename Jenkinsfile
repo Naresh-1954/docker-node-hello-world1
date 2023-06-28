@@ -46,10 +46,9 @@ pipeline {
                     git config --global user.mail "nareshcse31@gmail.com"
                     git add deployment.yaml
                     git commit -m "updated the deployment file"
+                    git push https://github.com/Naresh-1954/docker-node-hello-world.git master --force
                     """
-                    withCredentials([gitUsernamePassword(credentialsId: 'github-user', gitToolName: 'Default')]) {
-                        sh "git push https://github.com/Naresh-1954/docker-node-hello-world.git master --force"
-                    }
+                    
                 }
             }
         }

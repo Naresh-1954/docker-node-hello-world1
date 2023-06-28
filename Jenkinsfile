@@ -25,19 +25,17 @@ pipeline {
                 }
             }
         }
-		
-		stage('Updating kubernetes deployment file') {
+
+        stage('Updating Kubernetes Deployment File') {
             steps {
                 script {
-                       sh """
-					   cat deployment.yaml
-					   sed -i 's/${dockerImageName}.*/${dockerImageName}:${dockerImageTag}/g' deployment.yaml
-					   cat deployment.yaml
-					   
-					   """
-                    }
+                    sh """
+                    cat deployment.yaml
+                    sed -i 's@${dockerImageName}.*@${dockerImageName}:${dockerImageTag}@g' deployment.yaml
+                    cat deployment.yaml
+                    """
                 }
+            }
         }
-        
     }
 }

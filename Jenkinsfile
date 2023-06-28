@@ -44,6 +44,8 @@ pipeline {
                     sh """
 		    git config --global user.name "Naresh-1954"
                     git config --global user.email "nareshcse31@gmail.com"
+		    git checkout main
+                    git pull origin main
                     git add deployment.yaml
                     git commit -m "Update deployment file"
 	         	"""

@@ -42,6 +42,7 @@ pipeline {
             steps {
                 script {
                     sh """
+		    git pull  https://github.com/Naresh-1954/docker-node-hello-world1.git main
                     git config --global user.name "Naresh-1954"
                     git config --global user.email "nareshcse31@gmail.com"
                     git add deployment.yaml
@@ -50,7 +51,7 @@ pipeline {
 		    withCredentials([gitUsernamePassword(credentialsId: 'github-user', gitToolName: 'Default')]) {
                         sh """
 				git checkout main
-				git push https://github.com/Naresh-1954/docker-node-hello-world1.git master
+				git push https://github.com/Naresh-1954/docker-node-hello-world1.git main
                            """
                     }
 

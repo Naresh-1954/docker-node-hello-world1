@@ -25,39 +25,13 @@ pipeline {
                 }
             }
         }
-
-        stage('Updating Kubernetes Deployment File') {
+		
+		stage('Trigger the config change in pipeline') {
             steps {
                 script {
-                    sh """
-                    cat deployment.yaml
-                    sed -i 's@${dockerImageName}.*@${dockerImageName}:${dockerImageTag}@g' deployment.yaml
-                    cat deployment.yaml
-                    """
-                }
-            }
-        }
-        
-        stage('Push Deployment File to GitHub') {
-            steps {
-                script {
-                    sh """
-		    git config --global user.name "Naresh-1954"
-                    git config --global user.email "nareshcse31@gmail.com"
-		    git checkout main
-                    git pull origin main
-                    git add deployment.yaml
-                    git commit -m "Update deployment file"
-	         	"""
-		    withCredentials([gitUsernamePassword(credentialsId: 'github-user', gitToolName: 'Default')]) {
-                        sh """
-				        git checkout main
-                                        git push origin main
-                           """
+                        Sh curl -v -k -user admin:116c74bba9d03fd70e2fa8b6188663aaaa -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' -data 'IMAGE_TAG=${dockerImageTag}" 'http://50.19.171.233:8080/job/gitops-argocd_CD/buildWithParameters?token=gitops-config'
                     }
-
                 }
-            }
         }
     }
 }

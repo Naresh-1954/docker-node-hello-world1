@@ -25,17 +25,19 @@ pipeline {
                 }
             }
         }
-        
-        stage('Delete Docker Images') {
+		
+		stage('Updating kubernetes deployment file') {
             steps {
                 script {
-                    def imageTag = "${dockerImageName}:${dockerImageTag}"
-                    docker.withRegistry(dockerRegistry, dockerRegistryCredentials) {
-                        // Delete the Docker image
-                        docker.removeImage(imageTag)
+                       sh """
+					   cat deployment.yaml
+					   sed -i 's/${dockerImageName}.*/${dockerImageName}:${dockerImageTag}/g' deployment.yaml
+					   cat deployment.yaml
+					   
+					   """
                     }
                 }
-            }
         }
+        
     }
 }

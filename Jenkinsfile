@@ -44,6 +44,7 @@ pipeline {
                     sh """
                     git config --global user.name "Naresh-1954"
                     git config --global user.email "nareshcse31@gmail.com"
+                    git pull https://github.com/nani1231234/docker-node-hello-world1.git
                     git add deployment.yaml
                     git commit -m "Update deployment file"
                     git push origin main

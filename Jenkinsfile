@@ -38,21 +38,18 @@ pipeline {
             }
         }
         
-		stage('Push the changed deployment file to Git') {
-          steps {
-				script {
-					sh """
-						
-      					        git config --global user.name "Naresh-1954"
-						git config --global user.mail "nareshcse31@gmail.com"
-						git add deployment.yaml
-						git commit --amend --reset-author -m "updated the deployment file"
-						git push https://github.com/nani1231234/docker-node-hello-world1.git main
-					"""
-				}
+        stage('Push Deployment File to GitHub') {
+            steps {
+                script {
+                    sh """
+                    git config --global user.name "Naresh-1954"
+                    git config --global user.email "nareshcse31@gmail.com"
+                    git add deployment.yaml
+                    git commit -m "Update deployment file"
+                    git push origin main
+                    """
+                }
             }
         }
-
-
     }
 }

@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/nani1231234/docker-node-hello-world1.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/Naresh-1954/docker-node-hello-world1.git']]])
             }
         }
 
@@ -49,10 +49,11 @@ pipeline {
                     git add deployment.yaml
                     git commit -m "Update deployment file"
                     git checkout main
-                    git push https://your-github-username:${gitPassword}@github.com/nani1231234/docker-node-hello-world1.git main
+                    git push https://Naresh-1954:${gitPassword}@github.com/Naresh-1954/docker-node-hello-world1.git main
                     """
                 }
             }
         }
     }
 }
+

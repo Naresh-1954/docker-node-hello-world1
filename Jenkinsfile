@@ -46,7 +46,7 @@ pipeline {
 						git config --global user.mail "nareshcse31@gmail.com"
 						git add deployment.yaml
 						git commit --amend --reset-author -m "updated the deployment file"
-						git push https://github.com/Naresh-1954/docker-node-hello-world.git main
+						git push https://github.com/Naresh-1954/docker-node-hello-world.git master
 					"""
 				}
             }

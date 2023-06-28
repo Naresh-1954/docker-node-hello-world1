@@ -5,9 +5,7 @@ pipeline {
         dockerImageTag = "${BUILD_NUMBER}"
         dockerRegistry = "https://registry.hub.docker.com"
         dockerRegistryCredentials = "dockerlogin"
-        gitUsername = "Naresh-1954"
-        gitPassword = "Balu123$*"
-    }
+      }
 
     stages {
         stage('Checkout') {
@@ -48,9 +46,13 @@ pipeline {
                     git config --global user.email "nareshcse31@gmail.com"
                     git add deployment.yaml
                     git commit -m "Update deployment file"
-                    git checkout main
-                    git push https://Naresh-1954:${gitPassword}@github.com/Naresh-1954/docker-node-hello-world1.git main
-                    """
+					"""
+					withCredentials([gitUsernamePassword(credentialsId: 'github-user', gitToolName: 'Default')]) {
+                        sh """
+						git checkout main
+						git push https://github.com/Naresh-1954/docker-node-hello-world1.git master"
+                    }
+
                 }
             }
         }

@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         dockerImageName = "naresh1985/node-hello-world"
-        dockerImageTag = "1.2"
+        dockerImageTag = "${BUILD_NUMBER}"
         dockerRegistry = "https://registry.hub.docker.com"
         dockerRegistryCredentials = "dockerlogin"
     }
@@ -21,6 +21,18 @@ pipeline {
                     docker.build(imageTag)
                     docker.withRegistry(dockerRegistry, dockerRegistryCredentials) {
                         docker.image(imageTag).push()
+                    }
+                }
+            }
+        }
+        
+        stage('Delete Docker Images') {
+            steps {
+                script {
+                    def imageTag = "${dockerImageName}:${dockerImageTag}"
+                    docker.withRegistry(dockerRegistry, dockerRegistryCredentials) {
+                        // Delete the Docker image
+                        docker.image(imageTag).withForce().remove()
                     }
                 }
             }

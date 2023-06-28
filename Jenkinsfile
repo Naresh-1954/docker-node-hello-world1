@@ -44,11 +44,16 @@ pipeline {
                     sh """
                     git config --global user.name "Naresh-1954"
                     git config --global user.mail "nareshcse31@gmail.com"
+					git init
                     git add deployment.yaml
                     git commit -m "updated the deployment file"
                     """
                     withCredentials([gitUsernamePassword(credentialsId: 'github-user', gitToolName: 'Default')]) {
-                        sh "git push https://github.com/Naresh-1954/docker-node-hello-world.git master --force"
+					    sh """
+						git remote add origin https://github.com/Naresh-1954/docker-node-hello-world.git 
+                        git push origin master 
+						"""
+				
                     }
                 }
             }

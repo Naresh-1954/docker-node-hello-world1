@@ -29,7 +29,7 @@ pipeline {
         stage('Trigger the config change in pipeline') {
             steps {
                 script {
-                    sh "curl -v -k -user admin:116c74bba9d03fd70e2fa8b6188663aaaa -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' -d 'IMAGE_TAG=${dockerImageTag}' 'http://3.83.105.215:8080/job/gitops-argocd_CD/buildWithParameters?token=gitops-config'"
+                    sh "curl -v -k -user admin:118f4e302d009de38e65d67c61f94a26fa -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' -d 'IMAGE_TAG=${dockerImageTag}' 'http://3.83.105.215:8080/job/gitops-argocd_CD/buildWithParameters?token=gitops-config'"
                 }
             }
         }

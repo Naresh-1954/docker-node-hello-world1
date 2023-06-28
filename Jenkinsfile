@@ -47,6 +47,8 @@ pipeline {
                     git config --global user.email "nareshcse31@gmail.com"
                     git add deployment.yaml
                     git commit -m "Update deployment file"
+		     git checkout main
+		    git push origin main
 	         	"""
 		    withCredentials([gitUsernamePassword(credentialsId: 'github-user', gitToolName: 'Default')]) {
                         sh """

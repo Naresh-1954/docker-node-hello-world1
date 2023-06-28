@@ -32,7 +32,7 @@ pipeline {
                     def imageTag = "${dockerImageName}:${dockerImageTag}"
                     docker.withRegistry(dockerRegistry, dockerRegistryCredentials) {
                         // Delete the Docker image
-                        docker.image(imageTag).withForce().remove()
+                        docker.removeImage(imageTag)
                     }
                 }
             }

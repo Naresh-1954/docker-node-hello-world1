@@ -49,12 +49,9 @@ pipeline {
                     git commit -m "updated the deployment file"
                     """
                     withCredentials([gitUsernamePassword(credentialsId: 'github-user', gitToolName: 'Default')]) {
-					    sh """
-						git remote add origin https://github.com/Naresh-1954/docker-node-hello-world.git 
-                        git push origin master 
-						"""
-				
-                    }
+					    sh " git push origin master "                                       
+									
+                   }
                 }
             }
         }

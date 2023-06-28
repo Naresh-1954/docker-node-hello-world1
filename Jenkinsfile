@@ -48,7 +48,7 @@ pipeline {
                     git commit -m "updated the deployment file"
                     """
                     withCredentials([gitUsernamePassword(credentialsId: 'github-user', gitToolName: 'Default')]) {
-                        sh "git push https://github.com/Naresh-1954/docker-node-hello-world.git master"
+                        sh "git push https://github.com/Naresh-1954/docker-node-hello-world.git main"
                     }
                 }
             }

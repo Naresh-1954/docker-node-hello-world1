@@ -50,8 +50,9 @@ pipeline {
 	         	"""
 		    withCredentials([gitUsernamePassword(credentialsId: 'github-user', gitToolName: 'Default')]) {
                         sh """
-				git checkout main
-				git push https://github.com/Naresh-1954/docker-node-hello-world1.git main
+				        git checkout main
+                  			git pull origin main
+                    			git push origin main
                            """
                     }
 
